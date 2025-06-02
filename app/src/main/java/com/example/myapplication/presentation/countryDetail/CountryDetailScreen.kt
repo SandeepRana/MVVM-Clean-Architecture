@@ -1,10 +1,8 @@
 package com.example.myapplication.presentation.countryDetail
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,7 +20,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.myapplication.nav.Screen
-import com.example.myapplication.presentation.country.CountryCardItem
 import com.example.myapplication.presentation.country.Loading
 import com.example.myapplication.util.ApiResponse
 
@@ -57,7 +54,8 @@ fun CountryDetailScreen(
                         .height(300.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    Card(elevation = CardDefaults.cardElevation(5.dp),
+                    Card(
+                        elevation = CardDefaults.cardElevation(5.dp),
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(10.dp),

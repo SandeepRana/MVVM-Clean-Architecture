@@ -7,18 +7,18 @@ import com.example.myapplication.domain.repository.CountryRepository
 import com.example.myapplication.util.ApiResponse
 import javax.inject.Inject
 
-class CountryRepositoryImpl @Inject constructor(private val employeeAPI: CountryAPI) :
+class CountryRepositoryImpl @Inject constructor(private val countryAPI: CountryAPI) :
     CountryRepository {
     private val TAG = "CountryRepositoryImpl"
 
     override suspend fun getCountry(): List<Country> {
-        return employeeAPI.getCountryList()
+        return countryAPI.getCountryList()
     }
 
     override suspend fun getCountryDetail(name: String): ApiResponse<Country> {
 
         try {
-            val result = employeeAPI.getCountryDetail(name)
+            val result = countryAPI.getCountryDetail(name)
             return if (result.isNotEmpty()) {
                 ApiResponse.SUCCESS(result[0])
             } else {
@@ -28,6 +28,5 @@ class CountryRepositoryImpl @Inject constructor(private val employeeAPI: Country
             Log.d(TAG, "getCountryDetail: ${ex.printStackTrace()}")
             return ApiResponse.ERROR(ex.message.toString())
         }
-
     }
 }
