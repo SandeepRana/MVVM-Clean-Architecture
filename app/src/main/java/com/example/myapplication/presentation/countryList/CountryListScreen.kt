@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.country
+package com.example.myapplication.presentation.countryList
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,7 +24,7 @@ import com.example.myapplication.data.model.Country
 
 @Composable
 fun CountryScreen(innerPadding: PaddingValues, onClick: (String) -> Unit) {
-    val viewModel: CountryViewModel = hiltViewModel()
+    val viewModel: CountryListViewModel = hiltViewModel()
     val employees = viewModel.employeeList.collectAsState()
 
     if (employees.value.isEmpty()) {

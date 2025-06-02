@@ -11,8 +11,8 @@ class CountryRepositoryImpl @Inject constructor(private val countryAPI: CountryA
     CountryRepository {
     private val TAG = "CountryRepositoryImpl"
 
-    override suspend fun getCountry(): List<Country> {
-        return countryAPI.getCountryList()
+    override suspend fun getCountries(): List<Country> {
+        return countryAPI.getCountries()
     }
 
     override suspend fun getCountryDetail(name: String): ApiResponse<Country> {

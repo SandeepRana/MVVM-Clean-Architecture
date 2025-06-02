@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.myapplication.nav.Screen
-import com.example.myapplication.presentation.country.Loading
+import com.example.myapplication.presentation.countryList.Loading
 import com.example.myapplication.util.ApiResponse
 
 @Composable

@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.presentation.country.CountryScreen
+import com.example.myapplication.presentation.countryList.CountryScreen
 import com.example.myapplication.presentation.countryDetail.CountryDetailScreen
 
 @Composable

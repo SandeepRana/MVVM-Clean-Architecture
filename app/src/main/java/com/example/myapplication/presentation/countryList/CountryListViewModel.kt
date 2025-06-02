@@ -1,9 +1,9 @@
-package com.example.myapplication.presentation.country
+package com.example.myapplication.presentation.countryList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.model.Country
-import com.example.myapplication.domain.usecase.GetCountryUseCase
+import com.example.myapplication.domain.usecase.GetCountryListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CountryViewModel @Inject constructor(private val getCountryUseCase: GetCountryUseCase) :
+class CountryListViewModel @Inject constructor(private val getCountryUseCase: GetCountryListUseCase) :
     ViewModel() {
 
     private var _countryList = MutableStateFlow<List<Country>>(emptyList())

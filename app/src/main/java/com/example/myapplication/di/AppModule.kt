@@ -3,7 +3,7 @@ package com.example.myapplication.di
 import com.example.myapplication.data.remote.CountryAPI
 import com.example.myapplication.data.repository.CountryRepositoryImpl
 import com.example.myapplication.domain.repository.CountryRepository
-import com.example.myapplication.domain.usecase.GetCountryUseCase
+import com.example.myapplication.domain.usecase.GetCountryListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,8 +41,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideEmployeeUseCase(countryRepository: CountryRepository): GetCountryUseCase {
-        return GetCountryUseCase(countryRepository)
+    fun provideEmployeeUseCase(countryRepository: CountryRepository): GetCountryListUseCase {
+        return GetCountryListUseCase(countryRepository)
     }
 }
 
