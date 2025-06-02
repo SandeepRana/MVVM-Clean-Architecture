@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.presentation.countryList.CountryScreen
 import com.example.myapplication.presentation.countryDetail.CountryDetailScreen
+import com.example.myapplication.presentation.countryList.CountryListScreen
 
 @Composable
 fun NavGraph(innerPadding: PaddingValues) {
@@ -14,10 +14,10 @@ fun NavGraph(innerPadding: PaddingValues) {
     NavHost(navController = navController, startDestination = Screen.CountryList.route) {
 
         composable(route = Screen.CountryList.route) {
-            CountryScreen(innerPadding = innerPadding) {
+            CountryListScreen(innerPadding = innerPadding, onClick = {
                 navController.currentBackStackEntry?.savedStateHandle?.set(Screen.NAME, it)
                 navController.navigate(route = Screen.CountryDetail.route)
-            }
+            })
         }
 
         composable(route = Screen.CountryDetail.route) {

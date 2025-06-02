@@ -21,28 +21,40 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myapplication.data.model.Country
+import com.example.myapplication.util.ApiResponse
 
 @Composable
-fun CountryScreen(innerPadding: PaddingValues, onClick: (String) -> Unit) {
-    val viewModel: CountryListViewModel = hiltViewModel()
-    val employees = viewModel.employeeList.collectAsState()
+fun CountryListScreen(
+    innerPadding: PaddingValues,
+    onClick: (String) -> Unit,
+    viewModel: CountryListViewModel = hiltViewModel()
+) {
+    val countryList = viewModel.countryList.collectAsState().value
 
-    if (employees.value.isEmpty()) {
-        Loading(innerPadding)
-    } else {
-
-        Box(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-        ) {
-            LazyColumn {
-                items(employees.value) {
-                    CountryCardItem(country = it, onClick)
-                }
-            }
+    when (countryList) {
+        is ApiResponse.LOADING -> {
+            Loading(innerPadding)
         }
 
+        is ApiResponse.ERROR -> {}
+        is ApiResponse.SUCCESS -> {
+            ShowCountries(innerPadding, countryList.data, onClick)
+        }
+    }
+}
+
+@Composable
+fun ShowCountries(innerPadding: PaddingValues, data: List<Country>, onClick: (String) -> Unit) {
+    Box(
+        modifier = Modifier
+            .padding(innerPadding)
+            .fillMaxSize()
+    ) {
+        LazyColumn {
+            items(data) {
+                CountryCardItem(country = it, onClick = onClick)
+            }
+        }
     }
 }
 

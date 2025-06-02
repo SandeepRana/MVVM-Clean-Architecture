@@ -11,8 +11,14 @@ class CountryRepositoryImpl @Inject constructor(private val countryAPI: CountryA
     CountryRepository {
     private val TAG = "CountryRepositoryImpl"
 
-    override suspend fun getCountries(): List<Country> {
-        return countryAPI.getCountries()
+    override suspend fun getCountries(): ApiResponse<List<Country>> {
+        try {
+            val result = countryAPI.getCountries()
+            return ApiResponse.SUCCESS(result)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            return ApiResponse.ERROR(ex.message.toString())
+        }
     }
 
     override suspend fun getCountryDetail(name: String): ApiResponse<Country> {

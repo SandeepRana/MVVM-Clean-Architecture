@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.model.Country
 import com.example.myapplication.domain.usecase.GetCountryListUseCase
+import com.example.myapplication.util.ApiResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,8 +16,8 @@ import javax.inject.Inject
 class CountryListViewModel @Inject constructor(private val getCountryUseCase: GetCountryListUseCase) :
     ViewModel() {
 
-    private var _countryList = MutableStateFlow<List<Country>>(emptyList())
-    val employeeList: StateFlow<List<Country>>
+    private val _countryList = MutableStateFlow<ApiResponse<List<Country>>>(ApiResponse.LOADING())
+    val countryList: StateFlow<ApiResponse<List<Country>>>
         get() = _countryList
 
     init {
