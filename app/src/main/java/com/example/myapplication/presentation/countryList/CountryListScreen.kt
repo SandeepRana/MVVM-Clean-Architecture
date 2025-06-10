@@ -29,16 +29,19 @@ fun CountryListScreen(
     onClick: (String) -> Unit,
     viewModel: CountryListViewModel = hiltViewModel()
 ) {
-    val countryList = viewModel.countryList.collectAsState().value
+    val result = viewModel.countryList.collectAsState().value
 
-    when (countryList) {
+    when (result) {
         is ApiResponse.LOADING -> {
             Loading(innerPadding)
         }
 
-        is ApiResponse.ERROR -> {}
+        is ApiResponse.ERROR -> {
+            ShowError(innerPadding = innerPadding, error = result.error)
+        }
+
         is ApiResponse.SUCCESS -> {
-            ShowCountries(innerPadding, countryList.data, onClick)
+            ShowCountries(innerPadding, result.data, onClick)
         }
     }
 }
@@ -91,5 +94,17 @@ fun CountryCardItem(country: Country, onClick: (String) -> Unit) {
             )
             Text(text = country.flag, modifier = Modifier.padding(start = 10.dp))
         }
+    }
+}
+
+@Composable
+fun ShowError(innerPadding: PaddingValues, error: String) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text = error)
     }
 }

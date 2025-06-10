@@ -1,5 +1,6 @@
 package com.example.myapplication.presentation.countryDetail
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,6 +12,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,12 +25,23 @@ import com.example.myapplication.nav.Screen
 import com.example.myapplication.presentation.countryList.Loading
 import com.example.myapplication.util.ApiResponse
 
+private const val TAG = "CountryDetailScreen"
+
 @Composable
 fun CountryDetailScreen(
     innerPadding: PaddingValues,
     navController: NavController,
     viewModel: CountryDetailViewModel = hiltViewModel(),
 ) {
+
+    DisposableEffect(Unit) {
+        Log.d(TAG, "CountryDetailScreen: Composed")
+
+        onDispose {
+            Log.d(TAG, "CountryDetailScreen: Destroyed")
+        }
+    }
+
     val name = navController.previousBackStackEntry?.savedStateHandle?.get<String>(Screen.NAME)
     name?.let { viewModel.getCountryDetail(name) }
     val result = viewModel.countryDetail.collectAsState().value
