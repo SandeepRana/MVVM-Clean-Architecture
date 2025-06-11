@@ -2,7 +2,7 @@ package com.example.myapplication.presentation.countryDetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.data.model.Country
+import com.example.myapplication.domain.model.Country
 import com.example.myapplication.domain.usecase.GetCountryDetailUseCase
 import com.example.myapplication.util.ApiResponse
 import dagger.hilt.android.lifecycle.HiltViewModel

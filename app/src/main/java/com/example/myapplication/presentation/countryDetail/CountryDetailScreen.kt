@@ -89,7 +89,7 @@ fun CountryDetailScreen(
                                     modifier = Modifier.padding(start = 10.dp)
                                 )
                                 Text(
-                                    text = countryDetail.name.common,
+                                    text = countryDetail.commonName,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 40.sp
                                 )

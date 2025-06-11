@@ -1,6 +1,6 @@
 package com.example.myapplication.data.model
 
-data class Country(
+data class CountryDto(
     val name: Name = Name(),
     val flag: String = "",
 )

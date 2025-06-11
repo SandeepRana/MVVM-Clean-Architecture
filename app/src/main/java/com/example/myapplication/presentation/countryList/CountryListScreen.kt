@@ -13,6 +13,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -20,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.myapplication.data.model.Country
+import com.example.myapplication.domain.model.Country
 import com.example.myapplication.util.ApiResponse
 
 @Composable
@@ -29,6 +30,8 @@ fun CountryListScreen(
     onClick: (String) -> Unit,
     viewModel: CountryListViewModel = hiltViewModel()
 ) {
+
+
     val result = viewModel.countryList.collectAsState().value
 
     when (result) {
@@ -51,7 +54,8 @@ fun ShowCountries(innerPadding: PaddingValues, data: List<Country>, onClick: (St
     Box(
         modifier = Modifier
             .padding(innerPadding)
-            .fillMaxSize()
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
         LazyColumn {
             items(data) {
@@ -82,13 +86,13 @@ fun CountryCardItem(country: Country, onClick: (String) -> Unit) {
             .fillMaxSize()
             .padding(10.dp),
         onClick = {
-            onClick(country.name.common)
+            onClick(country.commonName)
 //            Toast.makeText(context, country.name.common, Toast.LENGTH_SHORT).show()
         }
     ) {
         Row(Modifier.padding(10.dp)) {
             Text(
-                text = country.name.common,
+                text = country.commonName,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )

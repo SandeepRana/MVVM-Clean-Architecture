@@ -1,8 +1,10 @@
 package com.example.myapplication.data.repository
 
 import android.util.Log
-import com.example.myapplication.data.model.Country
+import com.example.myapplication.data.mapper.toCountry
+import com.example.myapplication.data.mapper.toCountryList
 import com.example.myapplication.data.remote.CountryAPI
+import com.example.myapplication.domain.model.Country
 import com.example.myapplication.domain.repository.CountryRepository
 import com.example.myapplication.util.ApiResponse
 import javax.inject.Inject
@@ -14,7 +16,7 @@ class CountryRepositoryImpl @Inject constructor(private val countryAPI: CountryA
     override suspend fun getCountries(): ApiResponse<List<Country>> {
         try {
             val result = countryAPI.getCountries()
-            return ApiResponse.SUCCESS(result)
+            return ApiResponse.SUCCESS(result.toCountryList())
         } catch (ex: Exception) {
             ex.printStackTrace()
             return ApiResponse.ERROR(ex.message.toString())
@@ -26,7 +28,7 @@ class CountryRepositoryImpl @Inject constructor(private val countryAPI: CountryA
         try {
             val result = countryAPI.getCountryDetail(name)
             return if (result.isNotEmpty()) {
-                ApiResponse.SUCCESS(result[0])
+                ApiResponse.SUCCESS(result[0].toCountry())
             } else {
                 ApiResponse.ERROR("Result not found")
             }

@@ -1,6 +1,6 @@
 package com.example.myapplication.domain.repository
 
-import com.example.myapplication.data.model.Country
+import com.example.myapplication.domain.model.Country
 import com.example.myapplication.util.ApiResponse
 
 interface CountryRepository {
