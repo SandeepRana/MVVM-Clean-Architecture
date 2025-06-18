@@ -1,12 +1,14 @@
 package com.example.myapplication.presentation.countryList
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -55,13 +57,19 @@ fun ShowCountries(innerPadding: PaddingValues, data: List<Country>, onClick: (St
         modifier = Modifier
             .padding(innerPadding)
             .fillMaxSize(),
-        contentAlignment = Alignment.Center
     ) {
-        LazyColumn {
+        LazyColumn(modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 64.dp)) {
             items(data) {
                 CountryCardItem(country = it, onClick = onClick)
             }
         }
+
+        Button(onClick = { }, modifier = Modifier.align(Alignment.BottomCenter)) {
+            Text(text = "Refresh")
+        }
+
     }
 }
 

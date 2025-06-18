@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyApplicationTheme {
+            MyApplicationTheme("IN") {
                 Scaffold(modifier = Modifier.Companion.fillMaxSize()) { innerPadding ->
                     NavGraph(innerPadding = innerPadding)
                 }

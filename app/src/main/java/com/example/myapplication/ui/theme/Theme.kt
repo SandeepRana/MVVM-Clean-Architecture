@@ -9,6 +9,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
@@ -33,20 +34,37 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+val IndiaThemeColors = lightColorScheme(
+    primary = Color(0xFF6200EE),
+    secondary = Color(0xFF03DAC5),
+)
+
+val USThemeColors = lightColorScheme(
+    primary = Color(0xFF008577),
+    secondary = Color(0xFFD81B60),
+)
+
 @Composable
 fun MyApplicationTheme(
+    countryCode: String,
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
+    /*    val colorScheme = when {
+            dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+                val context = LocalContext.current
+                if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            }
 
-        darkTheme -> DarkColorScheme
+            darkTheme -> DarkColorScheme
+            else -> LightColorScheme
+        }*/
+
+    val colorScheme = when (countryCode) {
+        "IN" -> IndiaThemeColors
+        "US" -> USThemeColors
         else -> LightColorScheme
     }
 
