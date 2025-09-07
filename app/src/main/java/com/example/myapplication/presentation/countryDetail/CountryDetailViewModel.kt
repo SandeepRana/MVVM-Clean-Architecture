@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,8 +22,9 @@ class CountryDetailViewModel @Inject constructor(private val getCountryDetailUse
         get() = _countryDetail
 
     fun getCountryDetail(name: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _countryDetail.emit(getCountryDetailUseCase.invoke(name))
+        viewModelScope.launch {
+            val result = withContext(Dispatchers.IO) { getCountryDetailUseCase.invoke(name) }
+            _countryDetail.value = result
         }
     }
 }

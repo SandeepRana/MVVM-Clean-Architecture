@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,8 +26,9 @@ class CountryListViewModel @Inject constructor(private val getCountryUseCase: Ge
     }
 
     private fun getCountryList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _countryList.value = getCountryUseCase.invoke()
+        viewModelScope.launch {
+            val result = withContext(Dispatchers.IO) { getCountryUseCase.invoke() }
+            _countryList.value = result
         }
     }
 }
